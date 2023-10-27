@@ -13,12 +13,12 @@ using {
     sap.common.Criticality
 } from './common.cds';
 
-namespace sap.fe.showcase;
+namespace sap.fe.featureShowcase;
 
 aspect rootBasis : {
     // Integer  
     integerValue: Integer;
-    forecaseValue: Integer;
+    forecastValue: Integer;
     targetValue: Integer default 30;
     dimensions: Integer;
     criticality_code: Integer;
@@ -34,7 +34,7 @@ aspect rootBasis : {
 
     // String 
     stringProperty: String;
-    imageWithUrl: String;
+    imageUrl: String;
     fieldWithCriticality: String;
     fieldWithURL: String;
     fieldWithURLText: String;
@@ -88,7 +88,7 @@ entity RootEntities: cuid, managed, rootBasis {
 }
 
 // Variant of Root Entity 
-entity RootEntitiesVariant: cuid, managed, rootBasis { }
+entity RootEntityVariants: cuid, managed, rootBasis { }
 
 // Child Entity 1:
 entity ChildEntities1: cuid {
@@ -124,7 +124,7 @@ entity ChartDataEntities: cuid {
     integerValue: Integer;
     integerValueWithUOM: Integer;
     uom: UnitOfMeasure;
-    forecaseValue: Integer;
+    forecastValue: Integer;
     targetValue: Integer default 30;
     dimensions: Integer;
     areaChartToleranceUpperBoundValue: Integer default 90;

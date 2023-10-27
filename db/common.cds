@@ -15,7 +15,7 @@ using { User, managed,sap, Country, sap.common.CodeList  } from '@sap/cds/common
 // The sap common currencies already has fields, code, symbol and minorUnit. In
 // addition to these, the following three properties are included.
 extend sap.common.Currencies with {
-    numericCode: Integer;
+    numcode: Integer;
     exponent: Integer;
     minor: String;
 }
