@@ -23,3 +23,9 @@ This was originally created in the <strong>main</strong> branch and later all th
 The branch "step1-listreport" contains the changes, where an ui application is generated using the template with the basic annotations. Once the UI is created for the step1, merge the code to the branch using the following command. 
 
 git command: git push --set-upstream origin step1-listreport
+
+
+#### Step2 : Enabling the draft. 
+
+the branch "step2-configure-draft" has the changes to enable the draft annotation. 
+To enable the draft to the entityset we need to add the annotation @odata.draft.enabled: true. This activates the create and the draft functionality. For V4, i remember reading somewhere that the draft is mandatory and we cannot have create wihtout draft. This needs to be verified. 
