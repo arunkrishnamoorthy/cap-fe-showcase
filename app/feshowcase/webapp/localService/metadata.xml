@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="service1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="RootEntities" EntityType="service1.RootEntities">
+                    <NavigationPropertyBinding Path="uom" Target="UnitOfMeasureCodeList"/>
+                    <NavigationPropertyBinding Path="isoCurrency" Target="Currencies"/>
+                    <NavigationPropertyBinding Path="country" Target="Countries"/>
+                    <NavigationPropertyBinding Path="region" Target="Regions"/>
+                    <NavigationPropertyBinding Path="contact" Target="Contacts"/>
+                    <NavigationPropertyBinding Path="criticality" Target="Criticality"/>
+                    <NavigationPropertyBinding Path="childEntities1" Target="ChildEntities1"/>
+                    <NavigationPropertyBinding Path="childEntity2" Target="ChildEntities2"/>
+                    <NavigationPropertyBinding Path="childEntities3" Target="ChildEntities3"/>
+                    <NavigationPropertyBinding Path="chartEntities" Target="ChartDataEntities"/>
+                </EntitySet>
+                <EntitySet Name="ChildEntities1" EntityType="service1.ChildEntities1">
+                    <NavigationPropertyBinding Path="parent" Target="RootEntities"/>
+                    <NavigationPropertyBinding Path="criticalityValue" Target="Criticality"/>
+                    <NavigationPropertyBinding Path="grandChildren" Target="GrandChildEntities"/>
+                </EntitySet>
+                <EntitySet Name="ChildEntities2" EntityType="service1.ChildEntities2">
+                    <NavigationPropertyBinding Path="country" Target="Countries"/>
+                </EntitySet>
+                <EntitySet Name="ChildEntities3" EntityType="service1.ChildEntities3">
+                    <NavigationPropertyBinding Path="parent" Target="RootEntities"/>
+                </EntitySet>
+                <EntitySet Name="ChartDataEntities" EntityType="service1.ChartDataEntities">
+                    <NavigationPropertyBinding Path="parent" Target="RootEntities"/>
+                    <NavigationPropertyBinding Path="criticality" Target="Criticality"/>
+                    <NavigationPropertyBinding Path="uom" Target="UnitOfMeasureCodeList"/>
+                </EntitySet>
+                <EntitySet Name="GrandChildEntities" EntityType="service1.GrandChildEntities">
+                    <NavigationPropertyBinding Path="parent" Target="ChildEntities1"/>
+                </EntitySet>
+                <EntitySet Name="RootEntityVariants" EntityType="service1.RootEntityVariants">
+                    <NavigationPropertyBinding Path="uom" Target="UnitOfMeasureCodeList"/>
+                    <NavigationPropertyBinding Path="isoCurrency" Target="Currencies"/>
+                    <NavigationPropertyBinding Path="country" Target="Countries"/>
+                    <NavigationPropertyBinding Path="region" Target="Regions"/>
+                    <NavigationPropertyBinding Path="contact" Target="Contacts"/>
+                    <NavigationPropertyBinding Path="criticality" Target="Criticality"/>
+                </EntitySet>
+                <EntitySet Name="Contacts" EntityType="service1.Contacts">
+                    <NavigationPropertyBinding Path="country" Target="Countries"/>
+                </EntitySet>
+                <EntitySet Name="Countries" EntityType="service1.Countries">
+                    <NavigationPropertyBinding Path="regions" Target="Regions"/>
+                    <NavigationPropertyBinding Path="texts" Target="Countries_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Countries_texts"/>
+                </EntitySet>
+                <EntitySet Name="Currencies" EntityType="service1.Currencies">
+                    <NavigationPropertyBinding Path="texts" Target="Currencies_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Currencies_texts"/>
+                </EntitySet>
+                <EntitySet Name="Criticality" EntityType="service1.Criticality">
+                    <NavigationPropertyBinding Path="texts" Target="Criticality_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Criticality_texts"/>
+                </EntitySet>
+                <EntitySet Name="UnitOfMeasureCodeList" EntityType="service1.UnitOfMeasureCodeList">
+                    <NavigationPropertyBinding Path="texts" Target="UnitOfMeasureCodeList_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="UnitOfMeasureCodeList_texts"/>
+                </EntitySet>
+                <EntitySet Name="Regions" EntityType="service1.Regions">
+                    <NavigationPropertyBinding Path="country" Target="Countries"/>
+                    <NavigationPropertyBinding Path="texts" Target="Regions_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Regions_texts"/>
+                </EntitySet>
+                <EntitySet Name="Countries_texts" EntityType="service1.Countries_texts"/>
+                <EntitySet Name="Currencies_texts" EntityType="service1.Currencies_texts"/>
+                <EntitySet Name="Criticality_texts" EntityType="service1.Criticality_texts"/>
+                <EntitySet Name="UnitOfMeasureCodeList_texts" EntityType="service1.UnitOfMeasureCodeList_texts"/>
+                <EntitySet Name="Regions_texts" EntityType="service1.Regions_texts">
+                    <NavigationPropertyBinding Path="country" Target="Countries"/>
+                </EntitySet>
+                <ActionImport Name="unboundAction" Action="service1.unboundAction"/>
+                <ActionImport Name="criticalAction" Action="service1.criticalAction"/>
+            </EntityContainer>
+            <EntityType Name="RootEntities">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="integerValue" Type="Edm.Int32"/>
+                <Property Name="forecastValue" Type="Edm.Int32"/>
+                <Property Name="targetValue" Type="Edm.Int32" DefaultValue="30"/>
+                <Property Name="dimensions" Type="Edm.Int32"/>
+                <Property Name="criticality_code" Type="Edm.Int32"/>
+                <Property Name="starsValue" Type="Edm.Decimal" Scale="variable"/>
+                <Property Name="fieldWithUom" Type="Edm.Decimal" Scale="3" Precision="16"/>
+                <Property Name="fieldWithPrice" Type="Edm.Decimal" Scale="3" Precision="16"/>
+                <NavigationProperty Name="uom" Type="service1.UnitOfMeasureCodeList">
+                    <ReferentialConstraint Property="uom_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="uom_code" Type="Edm.String" MaxLength="30"/>
+                <NavigationProperty Name="isoCurrency" Type="service1.Currencies">
+                    <ReferentialConstraint Property="isoCurrency_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="isoCurrency_code" Type="Edm.String" MaxLength="3"/>
+                <Property Name="stringProperty" Type="Edm.String"/>
+                <Property Name="imageUrl" Type="Edm.String"/>
+                <Property Name="fieldWithCriticality" Type="Edm.String"/>
+                <Property Name="fieldWithURL" Type="Edm.String"/>
+                <Property Name="fieldWithURLText" Type="Edm.String"/>
+                <Property Name="email" Type="Edm.String"/>
+                <Property Name="telephone" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="description_customgrowing" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="validFrom" Type="Edm.Date"/>
+                <Property Name="validTo" Type="Edm.Date"/>
+                <Property Name="time" Type="Edm.TimeOfDay"/>
+                <Property Name="timeStamp" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="country" Type="service1.Countries">
+                    <ReferentialConstraint Property="country_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="country_code" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="region" Type="service1.Regions">
+                    <ReferentialConstraint Property="region_code" ReferencedProperty="code"/>
+                    <ReferentialConstraint Property="region_country_code" ReferencedProperty="country_code"/>
+                </NavigationProperty>
+                <Property Name="region_code" Type="Edm.String" MaxLength="10"/>
+                <Property Name="region_country_code" Type="Edm.String" MaxLength="3"/>
+                <Property Name="deletePossible" Type="Edm.Boolean"/>
+                <Property Name="updateHidden" Type="Edm.Boolean"/>
+                <NavigationProperty Name="contact" Type="service1.Contacts">
+                    <ReferentialConstraint Property="contact_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="contact_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="criticality" Type="service1.Criticality">
+                    <ReferentialConstraint Property="criticality_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <NavigationProperty Name="childEntities1" Type="Collection(service1.ChildEntities1)" Partner="parent">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="childEntity2" Type="service1.ChildEntities2">
+                    <ReferentialConstraint Property="childEntity2_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="childEntity2_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="childEntities3" Type="Collection(service1.ChildEntities3)" Partner="parent">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="chartEntities" Type="Collection(service1.ChartDataEntities)" Partner="parent">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ChildEntities1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="parent" Type="service1.RootEntities" Partner="childEntities1">
+                    <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="parent_ID" Type="Edm.Guid"/>
+                <Property Name="field" Type="Edm.String"/>
+                <Property Name="fieldWithPercent" Type="Edm.Decimal" Scale="2" Precision="5"/>
+                <Property Name="booleanProperty" Type="Edm.Boolean" DefaultValue="false"/>
+                <NavigationProperty Name="criticalityValue" Type="service1.Criticality">
+                    <ReferentialConstraint Property="criticalityValue_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="criticalityValue_code" Type="Edm.Int32" DefaultValue="0"/>
+                <NavigationProperty Name="grandChildren" Type="Collection(service1.GrandChildEntities)" Partner="parent">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ChildEntities2">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="stringProperty" Type="Edm.String"/>
+                <Property Name="integerProperty" Type="Edm.Int32"/>
+                <Property Name="decimalProperty" Type="Edm.Decimal" Scale="3" Precision="5"/>
+                <NavigationProperty Name="country" Type="service1.Countries">
+                    <ReferentialConstraint Property="country_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="country_code" Type="Edm.String" MaxLength="3"/>
+            </EntityType>
+            <EntityType Name="ChildEntities3">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="parent" Type="service1.RootEntities" Partner="childEntities3">
+                    <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="parent_ID" Type="Edm.Guid"/>
+                <Property Name="field" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="ChartDataEntities">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="parent" Type="service1.RootEntities" Partner="chartEntities">
+                    <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="parent_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="criticality" Type="service1.Criticality">
+                    <ReferentialConstraint Property="criticality_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="criticality_code" Type="Edm.Int32" DefaultValue="0"/>
+                <Property Name="integerValue" Type="Edm.Int32"/>
+                <Property Name="integerValueWithUOM" Type="Edm.Int32"/>
+                <NavigationProperty Name="uom" Type="service1.UnitOfMeasureCodeList">
+                    <ReferentialConstraint Property="uom_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="uom_code" Type="Edm.String" MaxLength="30"/>
+                <Property Name="forecastValue" Type="Edm.Int32"/>
+                <Property Name="targetValue" Type="Edm.Int32" DefaultValue="30"/>
+                <Property Name="dimensions" Type="Edm.Int32"/>
+                <Property Name="areaChartToleranceUpperBoundValue" Type="Edm.Int32" DefaultValue="90"/>
+                <Property Name="areaChartToleranceLowerBoundValue" Type="Edm.Int32" DefaultValue="80"/>
+                <Property Name="areaChartDeviationUpperBoundValue" Type="Edm.Int32" DefaultValue="50"/>
+                <Property Name="areaChartDeviationLowerBoundValue" Type="Edm.Int32" DefaultValue="0"/>
+            </EntityType>
+            <EntityType Name="GrandChildEntities">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="parent" Type="service1.ChildEntities1" Partner="grandChildren">
+                    <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="parent_ID" Type="Edm.Guid"/>
+                <Property Name="field" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="RootEntityVariants">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="integerValue" Type="Edm.Int32"/>
+                <Property Name="forecastValue" Type="Edm.Int32"/>
+                <Property Name="targetValue" Type="Edm.Int32" DefaultValue="30"/>
+                <Property Name="dimensions" Type="Edm.Int32"/>
+                <Property Name="criticality_code" Type="Edm.Int32"/>
+                <Property Name="starsValue" Type="Edm.Decimal" Scale="variable"/>
+                <Property Name="fieldWithUom" Type="Edm.Decimal" Scale="3" Precision="16"/>
+                <Property Name="fieldWithPrice" Type="Edm.Decimal" Scale="3" Precision="16"/>
+                <NavigationProperty Name="uom" Type="service1.UnitOfMeasureCodeList">
+                    <ReferentialConstraint Property="uom_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="uom_code" Type="Edm.String" MaxLength="30"/>
+                <NavigationProperty Name="isoCurrency" Type="service1.Currencies">
+                    <ReferentialConstraint Property="isoCurrency_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="isoCurrency_code" Type="Edm.String" MaxLength="3"/>
+                <Property Name="stringProperty" Type="Edm.String"/>
+                <Property Name="imageUrl" Type="Edm.String"/>
+                <Property Name="fieldWithCriticality" Type="Edm.String"/>
+                <Property Name="fieldWithURL" Type="Edm.String"/>
+                <Property Name="fieldWithURLText" Type="Edm.String"/>
+                <Property Name="email" Type="Edm.String"/>
+                <Property Name="telephone" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="description_customgrowing" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="validFrom" Type="Edm.Date"/>
+                <Property Name="validTo" Type="Edm.Date"/>
+                <Property Name="time" Type="Edm.TimeOfDay"/>
+                <Property Name="timeStamp" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="country" Type="service1.Countries">
+                    <ReferentialConstraint Property="country_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="country_code" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="region" Type="service1.Regions">
+                    <ReferentialConstraint Property="region_code" ReferencedProperty="code"/>
+                    <ReferentialConstraint Property="region_country_code" ReferencedProperty="country_code"/>
+                </NavigationProperty>
+                <Property Name="region_code" Type="Edm.String" MaxLength="10"/>
+                <Property Name="region_country_code" Type="Edm.String" MaxLength="3"/>
+                <Property Name="deletePossible" Type="Edm.Boolean"/>
+                <Property Name="updateHidden" Type="Edm.Boolean"/>
+                <NavigationProperty Name="contact" Type="service1.Contacts">
+                    <ReferentialConstraint Property="contact_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="contact_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="criticality" Type="service1.Criticality">
+                    <ReferentialConstraint Property="criticality_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Contacts">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="phone" Type="Edm.String"/>
+                <Property Name="building" Type="Edm.String"/>
+                <NavigationProperty Name="country" Type="service1.Countries">
+                    <ReferentialConstraint Property="country_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="country_code" Type="Edm.String" MaxLength="3"/>
+                <Property Name="street" Type="Edm.String"/>
+                <Property Name="city" Type="Edm.String"/>
+                <Property Name="postCode" Type="Edm.String"/>
+                <Property Name="addressLabel" Type="Edm.String"/>
+                <Property Name="photoUrl" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Countries">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <NavigationProperty Name="regions" Type="Collection(service1.Regions)" Partner="country">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="texts" Type="Collection(service1.Countries_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="service1.Countries_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Currencies">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="symbol" Type="Edm.String" MaxLength="5"/>
+                <Property Name="minorUnit" Type="Edm.Int16"/>
+                <Property Name="numcode" Type="Edm.Int32"/>
+                <Property Name="exponent" Type="Edm.Int32"/>
+                <Property Name="minor" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(service1.Currencies_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="service1.Currencies_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Criticality">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.Int32" Nullable="false" DefaultValue="0"/>
+                <NavigationProperty Name="texts" Type="Collection(service1.Criticality_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="service1.Criticality_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="UnitOfMeasureCodeList">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="30" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(service1.UnitOfMeasureCodeList_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="service1.UnitOfMeasureCodeList_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Regions">
+                <Key>
+                    <PropertyRef Name="code"/>
+                    <PropertyRef Name="country_code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="country" Type="service1.Countries" Partner="regions">
+                    <ReferentialConstraint Property="country_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="country_code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(service1.Regions_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="service1.Regions_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                    <ReferentialConstraint Property="country_code" ReferencedProperty="country_code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Countries_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Currencies_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Criticality_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.Int32" Nullable="false" DefaultValue="0"/>
+            </EntityType>
+            <EntityType Name="UnitOfMeasureCodeList_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="30" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Regions_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                    <PropertyRef Name="country_code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="country" Type="service1.Countries">
+                    <ReferentialConstraint Property="country_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="country_code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+            </EntityType>
+            <Action Name="changeCriticality" IsBound="true">
+                <Parameter Name="in" Type="service1.RootEntities"/>
+                <Parameter Name="newCriticality" Type="Edm.Int32"/>
+            </Action>
+            <Action Name="changeProgress" IsBound="true">
+                <Parameter Name="in" Type="service1.RootEntities"/>
+                <Parameter Name="newProgress" Type="Edm.Int32"/>
+            </Action>
+            <Action Name="resetEntities" IsBound="true">
+                <Parameter Name="in" Type="service1.RootEntities"/>
+            </Action>
+            <Action Name="unboundAction" IsBound="false">
+                <Parameter Name="input" Type="Edm.String"/>
+            </Action>
+            <Action Name="criticalAction" IsBound="false"/>
+            <Annotations Target="service1.RootEntities/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                </Annotations>
+                <Annotations Target="service1.RootEntities/createdBy">
+                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                    <Annotation Term="Core.Immutable" Bool="true"/>
+                    <Annotation Term="Core.Computed" Bool="true"/>
+                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                        </Annotations>
+                        <Annotations Target="service1.RootEntities/modifiedAt">
+                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                            <Annotation Term="Core.Computed" Bool="true"/>
+                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                            </Annotations>
+                            <Annotations Target="service1.RootEntities/modifiedBy">
+                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                <Annotation Term="Core.Computed" Bool="true"/>
+                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                    </Annotations>
+                                    <Annotations Target="service1.RootEntities/uom_code">
+                                        <Annotation Term="Common.ValueList">
+                                            <Record Type="Common.ValueListType">
+                                                <PropertyValue Property="Label" String="UnitOfMeasureCodeList"/>
+                                                <PropertyValue Property="CollectionPath" String="UnitOfMeasureCodeList"/>
+                                                <PropertyValue Property="Parameters">
+                                                    <Collection>
+                                                        <Record Type="Common.ValueListParameterInOut">
+                                                            <PropertyValue Property="LocalDataProperty" PropertyPath="uom_code"/>
+                                                            <PropertyValue Property="ValueListProperty" String="code"/>
+                                                        </Record>
+                                                        <Record Type="Common.ValueListParameterDisplayOnly">
+                                                            <PropertyValue Property="ValueListProperty" String="name"/>
+                                                        </Record>
+                                                    </Collection>
+                                                </PropertyValue>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="service1.RootEntities/isoCurrency">
+                                        <Annotation Term="Common.Label" String="{i18n>Currency}"/>
+                                            <Annotation Term="Core.Description" String="{i18n>CurrencyCode.Description}"/>
+                                            </Annotations>
+                                            <Annotations Target="service1.RootEntities/isoCurrency_code">
+                                                <Annotation Term="Common.Label" String="{i18n>Currency}"/>
+                                                    <Annotation Term="Common.ValueList">
+                                                        <Record Type="Common.ValueListType">
+                                                            <PropertyValue Property="Label" String="{i18n>Currency}"/>
+                                                                <PropertyValue Property="CollectionPath" String="Currencies"/>
+                                                                <PropertyValue Property="Parameters">
+                                                                    <Collection>
+                                                                        <Record Type="Common.ValueListParameterInOut">
+                                                                            <PropertyValue Property="LocalDataProperty" PropertyPath="isoCurrency_code"/>
+                                                                            <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                        </Record>
+                                                                        <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                            <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                        </Record>
+                                                                    </Collection>
+                                                                </PropertyValue>
+                                                            </Record>
+                                                        </Annotation>
+                                                        <Annotation Term="Core.Description" String="{i18n>CurrencyCode.Description}"/>
+                                                        </Annotations>
+                                                        <Annotations Target="service1.RootEntities/country">
+                                                            <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                </Annotations>
+                                                                <Annotations Target="service1.RootEntities/country_code">
+                                                                    <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                        <Annotation Term="Common.ValueList">
+                                                                            <Record Type="Common.ValueListType">
+                                                                                <PropertyValue Property="Label" String="{i18n>Country}"/>
+                                                                                    <PropertyValue Property="CollectionPath" String="Countries"/>
+                                                                                    <PropertyValue Property="Parameters">
+                                                                                        <Collection>
+                                                                                            <Record Type="Common.ValueListParameterInOut">
+                                                                                                <PropertyValue Property="LocalDataProperty" PropertyPath="country_code"/>
+                                                                                                <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                            </Record>
+                                                                                            <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                            </Record>
+                                                                                        </Collection>
+                                                                                    </PropertyValue>
+                                                                                </Record>
+                                                                            </Annotation>
+                                                                            <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                            </Annotations>
+                                                                            <Annotations Target="service1.RootEntities/region_code">
+                                                                                <Annotation Term="Common.ValueList">
+                                                                                    <Record Type="Common.ValueListType">
+                                                                                        <PropertyValue Property="Label" String="Regions"/>
+                                                                                        <PropertyValue Property="CollectionPath" String="Regions"/>
+                                                                                        <PropertyValue Property="Parameters">
+                                                                                            <Collection>
+                                                                                                <Record Type="Common.ValueListParameterInOut">
+                                                                                                    <PropertyValue Property="LocalDataProperty" PropertyPath="region_code"/>
+                                                                                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                </Record>
+                                                                                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                </Record>
+                                                                                            </Collection>
+                                                                                        </PropertyValue>
+                                                                                    </Record>
+                                                                                </Annotation>
+                                                                            </Annotations>
+                                                                            <Annotations Target="service1.RootEntities/region_country_code">
+                                                                                <Annotation Term="Common.ValueList">
+                                                                                    <Record Type="Common.ValueListType">
+                                                                                        <PropertyValue Property="Label" String="Regions"/>
+                                                                                        <PropertyValue Property="CollectionPath" String="Regions"/>
+                                                                                        <PropertyValue Property="Parameters">
+                                                                                            <Collection>
+                                                                                                <Record Type="Common.ValueListParameterInOut">
+                                                                                                    <PropertyValue Property="LocalDataProperty" PropertyPath="region_country_code"/>
+                                                                                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                </Record>
+                                                                                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                </Record>
+                                                                                            </Collection>
+                                                                                        </PropertyValue>
+                                                                                    </Record>
+                                                                                </Annotation>
+                                                                            </Annotations>
+                                                                            <Annotations Target="service1.ChildEntities1/criticalityValue_code">
+                                                                                <Annotation Term="Common.ValueList">
+                                                                                    <Record Type="Common.ValueListType">
+                                                                                        <PropertyValue Property="Label" String="Criticality"/>
+                                                                                        <PropertyValue Property="CollectionPath" String="Criticality"/>
+                                                                                        <PropertyValue Property="Parameters">
+                                                                                            <Collection>
+                                                                                                <Record Type="Common.ValueListParameterInOut">
+                                                                                                    <PropertyValue Property="LocalDataProperty" PropertyPath="criticalityValue_code"/>
+                                                                                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                </Record>
+                                                                                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                </Record>
+                                                                                            </Collection>
+                                                                                        </PropertyValue>
+                                                                                    </Record>
+                                                                                </Annotation>
+                                                                            </Annotations>
+                                                                            <Annotations Target="service1.ChildEntities2/country">
+                                                                                <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                    <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="service1.ChildEntities2/country_code">
+                                                                                        <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                            <Annotation Term="Common.ValueList">
+                                                                                                <Record Type="Common.ValueListType">
+                                                                                                    <PropertyValue Property="Label" String="{i18n>Country}"/>
+                                                                                                        <PropertyValue Property="CollectionPath" String="Countries"/>
+                                                                                                        <PropertyValue Property="Parameters">
+                                                                                                            <Collection>
+                                                                                                                <Record Type="Common.ValueListParameterInOut">
+                                                                                                                    <PropertyValue Property="LocalDataProperty" PropertyPath="country_code"/>
+                                                                                                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                </Record>
+                                                                                                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                </Record>
+                                                                                                            </Collection>
+                                                                                                        </PropertyValue>
+                                                                                                    </Record>
+                                                                                                </Annotation>
+                                                                                                <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="service1.ChartDataEntities/criticality_code">
+                                                                                                    <Annotation Term="Common.ValueList">
+                                                                                                        <Record Type="Common.ValueListType">
+                                                                                                            <PropertyValue Property="Label" String="Criticality"/>
+                                                                                                            <PropertyValue Property="CollectionPath" String="Criticality"/>
+                                                                                                            <PropertyValue Property="Parameters">
+                                                                                                                <Collection>
+                                                                                                                    <Record Type="Common.ValueListParameterInOut">
+                                                                                                                        <PropertyValue Property="LocalDataProperty" PropertyPath="criticality_code"/>
+                                                                                                                        <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                    </Record>
+                                                                                                                    <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                        <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                    </Record>
+                                                                                                                </Collection>
+                                                                                                            </PropertyValue>
+                                                                                                        </Record>
+                                                                                                    </Annotation>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="service1.ChartDataEntities/uom_code">
+                                                                                                    <Annotation Term="Common.ValueList">
+                                                                                                        <Record Type="Common.ValueListType">
+                                                                                                            <PropertyValue Property="Label" String="UnitOfMeasureCodeList"/>
+                                                                                                            <PropertyValue Property="CollectionPath" String="UnitOfMeasureCodeList"/>
+                                                                                                            <PropertyValue Property="Parameters">
+                                                                                                                <Collection>
+                                                                                                                    <Record Type="Common.ValueListParameterInOut">
+                                                                                                                        <PropertyValue Property="LocalDataProperty" PropertyPath="uom_code"/>
+                                                                                                                        <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                    </Record>
+                                                                                                                    <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                        <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                    </Record>
+                                                                                                                </Collection>
+                                                                                                            </PropertyValue>
+                                                                                                        </Record>
+                                                                                                    </Annotation>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="service1.RootEntityVariants/createdAt">
+                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                    <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                    </Annotations>
+                                                                                                    <Annotations Target="service1.RootEntityVariants/createdBy">
+                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                            <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="service1.RootEntityVariants/modifiedAt">
+                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                </Annotations>
+                                                                                                                <Annotations Target="service1.RootEntityVariants/modifiedBy">
+                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                        </Annotations>
+                                                                                                                        <Annotations Target="service1.RootEntityVariants/uom_code">
+                                                                                                                            <Annotation Term="Common.ValueList">
+                                                                                                                                <Record Type="Common.ValueListType">
+                                                                                                                                    <PropertyValue Property="Label" String="UnitOfMeasureCodeList"/>
+                                                                                                                                    <PropertyValue Property="CollectionPath" String="UnitOfMeasureCodeList"/>
+                                                                                                                                    <PropertyValue Property="Parameters">
+                                                                                                                                        <Collection>
+                                                                                                                                            <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                <PropertyValue Property="LocalDataProperty" PropertyPath="uom_code"/>
+                                                                                                                                                <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                            </Record>
+                                                                                                                                            <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                            </Record>
+                                                                                                                                        </Collection>
+                                                                                                                                    </PropertyValue>
+                                                                                                                                </Record>
+                                                                                                                            </Annotation>
+                                                                                                                        </Annotations>
+                                                                                                                        <Annotations Target="service1.RootEntityVariants/isoCurrency">
+                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Currency}"/>
+                                                                                                                                <Annotation Term="Core.Description" String="{i18n>CurrencyCode.Description}"/>
+                                                                                                                                </Annotations>
+                                                                                                                                <Annotations Target="service1.RootEntityVariants/isoCurrency_code">
+                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Currency}"/>
+                                                                                                                                        <Annotation Term="Common.ValueList">
+                                                                                                                                            <Record Type="Common.ValueListType">
+                                                                                                                                                <PropertyValue Property="Label" String="{i18n>Currency}"/>
+                                                                                                                                                    <PropertyValue Property="CollectionPath" String="Currencies"/>
+                                                                                                                                                    <PropertyValue Property="Parameters">
+                                                                                                                                                        <Collection>
+                                                                                                                                                            <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                                <PropertyValue Property="LocalDataProperty" PropertyPath="isoCurrency_code"/>
+                                                                                                                                                                <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                                            </Record>
+                                                                                                                                                            <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                                <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                                            </Record>
+                                                                                                                                                        </Collection>
+                                                                                                                                                    </PropertyValue>
+                                                                                                                                                </Record>
+                                                                                                                                            </Annotation>
+                                                                                                                                            <Annotation Term="Core.Description" String="{i18n>CurrencyCode.Description}"/>
+                                                                                                                                            </Annotations>
+                                                                                                                                            <Annotations Target="service1.RootEntityVariants/country">
+                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                    <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                    </Annotations>
+                                                                                                                                                    <Annotations Target="service1.RootEntityVariants/country_code">
+                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                            <Annotation Term="Common.ValueList">
+                                                                                                                                                                <Record Type="Common.ValueListType">
+                                                                                                                                                                    <PropertyValue Property="Label" String="{i18n>Country}"/>
+                                                                                                                                                                        <PropertyValue Property="CollectionPath" String="Countries"/>
+                                                                                                                                                                        <PropertyValue Property="Parameters">
+                                                                                                                                                                            <Collection>
+                                                                                                                                                                                <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                                                    <PropertyValue Property="LocalDataProperty" PropertyPath="country_code"/>
+                                                                                                                                                                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                                                                </Record>
+                                                                                                                                                                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                                                                </Record>
+                                                                                                                                                                            </Collection>
+                                                                                                                                                                        </PropertyValue>
+                                                                                                                                                                    </Record>
+                                                                                                                                                                </Annotation>
+                                                                                                                                                                <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                                </Annotations>
+                                                                                                                                                                <Annotations Target="service1.RootEntityVariants/region_code">
+                                                                                                                                                                    <Annotation Term="Common.ValueList">
+                                                                                                                                                                        <Record Type="Common.ValueListType">
+                                                                                                                                                                            <PropertyValue Property="Label" String="Regions"/>
+                                                                                                                                                                            <PropertyValue Property="CollectionPath" String="Regions"/>
+                                                                                                                                                                            <PropertyValue Property="Parameters">
+                                                                                                                                                                                <Collection>
+                                                                                                                                                                                    <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                                                        <PropertyValue Property="LocalDataProperty" PropertyPath="region_code"/>
+                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                                                                    </Record>
+                                                                                                                                                                                    <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                                                                    </Record>
+                                                                                                                                                                                </Collection>
+                                                                                                                                                                            </PropertyValue>
+                                                                                                                                                                        </Record>
+                                                                                                                                                                    </Annotation>
+                                                                                                                                                                </Annotations>
+                                                                                                                                                                <Annotations Target="service1.RootEntityVariants/region_country_code">
+                                                                                                                                                                    <Annotation Term="Common.ValueList">
+                                                                                                                                                                        <Record Type="Common.ValueListType">
+                                                                                                                                                                            <PropertyValue Property="Label" String="Regions"/>
+                                                                                                                                                                            <PropertyValue Property="CollectionPath" String="Regions"/>
+                                                                                                                                                                            <PropertyValue Property="Parameters">
+                                                                                                                                                                                <Collection>
+                                                                                                                                                                                    <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                                                        <PropertyValue Property="LocalDataProperty" PropertyPath="region_country_code"/>
+                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                                                                    </Record>
+                                                                                                                                                                                    <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                                                                    </Record>
+                                                                                                                                                                                </Collection>
+                                                                                                                                                                            </PropertyValue>
+                                                                                                                                                                        </Record>
+                                                                                                                                                                    </Annotation>
+                                                                                                                                                                </Annotations>
+                                                                                                                                                                <Annotations Target="service1.Contacts/country">
+                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                                        <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                                        </Annotations>
+                                                                                                                                                                        <Annotations Target="service1.Contacts/country_code">
+                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                                                <Annotation Term="Common.ValueList">
+                                                                                                                                                                                    <Record Type="Common.ValueListType">
+                                                                                                                                                                                        <PropertyValue Property="Label" String="{i18n>Country}"/>
+                                                                                                                                                                                            <PropertyValue Property="CollectionPath" String="Countries"/>
+                                                                                                                                                                                            <PropertyValue Property="Parameters">
+                                                                                                                                                                                                <Collection>
+                                                                                                                                                                                                    <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                                                                        <PropertyValue Property="LocalDataProperty" PropertyPath="country_code"/>
+                                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                                                                                    </Record>
+                                                                                                                                                                                                    <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                                                                                    </Record>
+                                                                                                                                                                                                </Collection>
+                                                                                                                                                                                            </PropertyValue>
+                                                                                                                                                                                        </Record>
+                                                                                                                                                                                    </Annotation>
+                                                                                                                                                                                    <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                    <Annotations Target="service1.Countries">
+                                                                                                                                                                                        <Annotation Term="UI.Identification">
+                                                                                                                                                                                            <Collection>
+                                                                                                                                                                                                <Record Type="UI.DataField">
+                                                                                                                                                                                                    <PropertyValue Property="Value" Path="name"/>
+                                                                                                                                                                                                </Record>
+                                                                                                                                                                                            </Collection>
+                                                                                                                                                                                        </Annotation>
+                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                    <Annotations Target="service1.Countries/name">
+                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                        <Annotations Target="service1.Countries/descr">
+                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                            <Annotations Target="service1.Countries/code">
+                                                                                                                                                                                                <Annotation Term="Common.Text" Path="name"/>
+                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>CountryCode}"/>
+                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                <Annotations Target="service1.Currencies">
+                                                                                                                                                                                                    <Annotation Term="UI.Identification">
+                                                                                                                                                                                                        <Collection>
+                                                                                                                                                                                                            <Record Type="UI.DataField">
+                                                                                                                                                                                                                <PropertyValue Property="Value" Path="name"/>
+                                                                                                                                                                                                            </Record>
+                                                                                                                                                                                                        </Collection>
+                                                                                                                                                                                                    </Annotation>
+                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                <Annotations Target="service1.Currencies/name">
+                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                    <Annotations Target="service1.Currencies/descr">
+                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                        <Annotations Target="service1.Currencies/code">
+                                                                                                                                                                                                            <Annotation Term="Common.Text" Path="name"/>
+                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>CurrencyCode}"/>
+                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                            <Annotations Target="service1.Currencies/symbol">
+                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>CurrencySymbol}"/>
+                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                <Annotations Target="service1.Currencies/minorUnit">
+                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CurrencyMinorUnit}"/>
+                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                    <Annotations Target="service1.Criticality">
+                                                                                                                                                                                                                        <Annotation Term="UI.Identification">
+                                                                                                                                                                                                                            <Collection>
+                                                                                                                                                                                                                                <Record Type="UI.DataField">
+                                                                                                                                                                                                                                    <PropertyValue Property="Value" Path="name"/>
+                                                                                                                                                                                                                                </Record>
+                                                                                                                                                                                                                            </Collection>
+                                                                                                                                                                                                                        </Annotation>
+                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                    <Annotations Target="service1.Criticality/name">
+                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                        <Annotations Target="service1.Criticality/descr">
+                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                            <Annotations Target="service1.UnitOfMeasureCodeList">
+                                                                                                                                                                                                                                <Annotation Term="UI.Identification">
+                                                                                                                                                                                                                                    <Collection>
+                                                                                                                                                                                                                                        <Record Type="UI.DataField">
+                                                                                                                                                                                                                                            <PropertyValue Property="Value" Path="name"/>
+                                                                                                                                                                                                                                        </Record>
+                                                                                                                                                                                                                                    </Collection>
+                                                                                                                                                                                                                                </Annotation>
+                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                            <Annotations Target="service1.UnitOfMeasureCodeList/name">
+                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                <Annotations Target="service1.UnitOfMeasureCodeList/descr">
+                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                    <Annotations Target="service1.Regions">
+                                                                                                                                                                                                                                        <Annotation Term="UI.Identification">
+                                                                                                                                                                                                                                            <Collection>
+                                                                                                                                                                                                                                                <Record Type="UI.DataField">
+                                                                                                                                                                                                                                                    <PropertyValue Property="Value" Path="name"/>
+                                                                                                                                                                                                                                                </Record>
+                                                                                                                                                                                                                                            </Collection>
+                                                                                                                                                                                                                                        </Annotation>
+                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                    <Annotations Target="service1.Regions/name">
+                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                        <Annotations Target="service1.Regions/descr">
+                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                            <Annotations Target="service1.Regions/code">
+                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>region}"/>
+                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                <Annotations Target="service1.Regions/country">
+                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                                                                                                                        <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                        <Annotations Target="service1.Regions/country_code">
+                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                                                                                                                                <Annotation Term="Common.ValueList">
+                                                                                                                                                                                                                                                                    <Record Type="Common.ValueListType">
+                                                                                                                                                                                                                                                                        <PropertyValue Property="Label" String="{i18n>Country}"/>
+                                                                                                                                                                                                                                                                            <PropertyValue Property="CollectionPath" String="Countries"/>
+                                                                                                                                                                                                                                                                            <PropertyValue Property="Parameters">
+                                                                                                                                                                                                                                                                                <Collection>
+                                                                                                                                                                                                                                                                                    <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                                                                                                                                                        <PropertyValue Property="LocalDataProperty" PropertyPath="country_code"/>
+                                                                                                                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                                                                                                                                                                    </Record>
+                                                                                                                                                                                                                                                                                    <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                                                                                                                                                        <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                                                                                                                                                                    </Record>
+                                                                                                                                                                                                                                                                                </Collection>
+                                                                                                                                                                                                                                                                            </PropertyValue>
+                                                                                                                                                                                                                                                                        </Record>
+                                                                                                                                                                                                                                                                    </Annotation>
+                                                                                                                                                                                                                                                                    <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                    <Annotations Target="service1.Countries_texts/locale">
+                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                        <Annotations Target="service1.Countries_texts/name">
+                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                            <Annotations Target="service1.Countries_texts/descr">
+                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                <Annotations Target="service1.Countries_texts/code">
+                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Text" Path="name"/>
+                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CountryCode}"/>
+                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                    <Annotations Target="service1.Currencies_texts/locale">
+                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                        <Annotations Target="service1.Currencies_texts/name">
+                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                            <Annotations Target="service1.Currencies_texts/descr">
+                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                <Annotations Target="service1.Currencies_texts/code">
+                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Text" Path="name"/>
+                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>CurrencyCode}"/>
+                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                    <Annotations Target="service1.Criticality_texts/locale">
+                                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                                        <Annotations Target="service1.Criticality_texts/name">
+                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                                            <Annotations Target="service1.Criticality_texts/descr">
+                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                                <Annotations Target="service1.UnitOfMeasureCodeList_texts/locale">
+                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                                    <Annotations Target="service1.UnitOfMeasureCodeList_texts/name">
+                                                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                                                        <Annotations Target="service1.UnitOfMeasureCodeList_texts/descr">
+                                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                                                            <Annotations Target="service1.Regions_texts/locale">
+                                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                                                <Annotations Target="service1.Regions_texts/name">
+                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                                                    <Annotations Target="service1.Regions_texts/descr">
+                                                                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                                                                                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                                                                                                                                                                        <Annotations Target="service1.Regions_texts/code">
+                                                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>region}"/>
+                                                                                                                                                                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                                                                                                                                                                            <Annotations Target="service1.Regions_texts/country">
+                                                                                                                                                                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                                                                                                                                                                                                                    <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                                                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                                                                                                                                                                                    <Annotations Target="service1.Regions_texts/country_code">
+                                                                                                                                                                                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                                                                                                                                                                                                                                                                                                                                                            <Annotation Term="Common.ValueList">
+                                                                                                                                                                                                                                                                                                                                                                <Record Type="Common.ValueListType">
+                                                                                                                                                                                                                                                                                                                                                                    <PropertyValue Property="Label" String="{i18n>Country}"/>
+                                                                                                                                                                                                                                                                                                                                                                        <PropertyValue Property="CollectionPath" String="Countries"/>
+                                                                                                                                                                                                                                                                                                                                                                        <PropertyValue Property="Parameters">
+                                                                                                                                                                                                                                                                                                                                                                            <Collection>
+                                                                                                                                                                                                                                                                                                                                                                                <Record Type="Common.ValueListParameterInOut">
+                                                                                                                                                                                                                                                                                                                                                                                    <PropertyValue Property="LocalDataProperty" PropertyPath="country_code"/>
+                                                                                                                                                                                                                                                                                                                                                                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                                                                                                                                                                                                                                                                                                                                                                </Record>
+                                                                                                                                                                                                                                                                                                                                                                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                                                                                                                                                                                                                                                                                                                                                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                                                                                                                                                                                                                                                                                                                                                                </Record>
+                                                                                                                                                                                                                                                                                                                                                                            </Collection>
+                                                                                                                                                                                                                                                                                                                                                                        </PropertyValue>
+                                                                                                                                                                                                                                                                                                                                                                    </Record>
+                                                                                                                                                                                                                                                                                                                                                                </Annotation>
+                                                                                                                                                                                                                                                                                                                                                                <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                                                                                                                                                                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                                                                                                                                                                                            </Schema>
+                                                                                                                                                                                                                                                                                                                                                        </edmx:DataServices>
+                                                                                                                                                                                                                                                                                                                                                    </edmx:Edmx>
