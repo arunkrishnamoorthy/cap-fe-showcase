@@ -29,3 +29,12 @@ git command: git push --set-upstream origin step1-listreport
 
 the branch "step2-configure-draft" has the changes to enable the draft annotation. 
 To enable the draft to the entityset we need to add the annotation @odata.draft.enabled: true. This activates the create and the draft functionality. For V4, i remember reading somewhere that the draft is mandatory and we cannot have create wihtout draft. This needs to be verified. 
+
+
+### Step3 : Replace Standard i18n texts
+
+this branch "step3-replace-texts" has the changes to add the enhanceI18n property to the manifest of the respective target where the custom texts needs to be replaced. 
+
+the variables of the standard texts can be found in the below links and can be used in the custom18n properties file to replace the standard texts. 
+
+https://sapui5.hana.ondemand.com/#/topic/b8cb649973534f08a6047692f8c6830d
