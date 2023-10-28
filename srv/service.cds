@@ -23,4 +23,10 @@ service service1 @(path: '/srv1') {
     entity Currencies            as projection on common.Currencies;
     entity Criticality           as projection on common.Criticality;
     entity UnitOfMeasureCodeList as projection on common.UnitOfMeasureCodeList;
+
+    // Draft is disabled for the Semantic Keys entityset
+    @odata.draft.enabled: false
+    entity RootEntitySemanticKeys as select from RootEntities {
+        stringProperty
+    }
 }
