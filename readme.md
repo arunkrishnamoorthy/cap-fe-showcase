@@ -38,3 +38,11 @@ this branch "step3-replace-texts" has the changes to add the enhanceI18n propert
 the variables of the standard texts can be found in the below links and can be used in the custom18n properties file to replace the standard texts. 
 
 https://sapui5.hana.ondemand.com/#/topic/b8cb649973534f08a6047692f8c6830d
+
+### Step 4: Custom Action 
+
+this branch "step4-custom-action" has the implementation logic for implementing an custom actions in the list report page. 
+The details of the implementation is maintained as comments in the controller where the custom action logic is implemented.   
+
+in the folder path app->feshowcase->ext->customaction->CustomAction.js - the logic is implemented. 
+in the manifest.json file, in the controlConfiguration setting of the line item annotation, the config are made to render custom button on the UI. 
