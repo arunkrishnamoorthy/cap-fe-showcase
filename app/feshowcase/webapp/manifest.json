@@ -111,6 +111,7 @@
             "settings": {
               "contextPath": "/RootEntities",
               "variantManagement": "Page",
+              "enhanceI18n": "i18n/customI18N.properties",
               "navigation": {
                 "RootEntities": {
                   "detail": {
