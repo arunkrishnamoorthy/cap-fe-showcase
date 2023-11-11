@@ -46,3 +46,20 @@ The details of the implementation is maintained as comments in the controller wh
 
 in the folder path app->feshowcase->ext->customaction->CustomAction.js - the logic is implemented. 
 in the manifest.json file, in the controlConfiguration setting of the line item annotation, the config are made to render custom button on the UI. 
+
+### Step 5: Adding filter conditions 
+
+To add filters to the ui, add the selections fields annotation to the CDS file. 
+
+```cds
+using service1 as service from '../../srv/service';
+
+annotate service1.RootEntities with @(
+    UI.SelectionFields: [
+        fieldWithPrice,
+        validFrom,
+        validTo,
+    ]
+);
+```
+
