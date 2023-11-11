@@ -98,4 +98,24 @@ Help Links:
 https://sapui5.hana.ondemand.com/sdk/#/topic/f27ad7bc1f9c4b0d947b1fb18c37e94c.html
 
 
+### Step 7: Hide filters 
 
+By adding field control to the entity, the display of the fields can be controlled. To hide an element from the UI there are two possible annotation. 
+
+1. @UI.Hidden  -> Hides the element throughout (Selection Field, Table, Forms)
+2. @UI.HiddenFilter -> Hides the element only at the Filterbar. (Selection Fields)
+
+Adding field control to the annotation. By adding the hidden filter annotation, the fields, 
+validFrom and validTo are not available for selection in the adapt filters. 
+
+An import point to note here. this only hides the ui from the display. If suppose we have a default value specified to the
+fields as in the previous step, the value is still added to the filter when the get request is triggered. Since this will be a hidden filter user won't be able to overwrite the value. 
+
+```
+using service1 as service from '../../srv/service';
+
+annotate service.RootEntities {
+    validFrom @UI.HiddenFilter;
+    validTo @UI.HiddenFilter;
+}
+```
