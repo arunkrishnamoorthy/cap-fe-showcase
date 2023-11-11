@@ -119,3 +119,35 @@ annotate service.RootEntities {
     validTo @UI.HiddenFilter;
 }
 ```
+
+### Add Filter grouping. 
+
+To add filter grouping to the UI, use the annotation @UI.FilterFacets . This annotation helps us structure the selections fields into the groups, making it easier for adapatations and switching between groups. 
+
+```
+using service1 as service from '../../srv/service';
+
+annotate service1.RootEntities with @(
+     UI.FilterFacets: [
+        {
+            Target  : '@UI.FieldGroup#validperiod',
+            Label   : 'Validity Grouping',
+        }
+    ],
+);
+
+/**
+ * Field Group annotation
+ */
+
+ annotate service1.RootEntities with @(
+    UI.FieldGroup #validperiod  : {
+        Data: [
+            {Value: 'validFrom'},
+            {Value: 'validTo'}
+        ]
+    }
+ );
+```
+
+> This is not working at the moment. This part needs to be revisted.
