@@ -98,4 +98,20 @@ Help Links:
 https://sapui5.hana.ondemand.com/sdk/#/topic/f27ad7bc1f9c4b0d947b1fb18c37e94c.html
 
 
+### Step 7: Hide filters 
 
+By adding field control to the entity, the display of the fields can be controlled. To hide an element from the UI there are two possible annotation. 
+
+1. @UI.Hidden  -> Hides the element throughout (Selection Field, Table, Forms)
+2. @UI.HiddenFilter -> Hides the element only at the Filterbar. (Selection Fields)
+
+Adding field control to the annotation. 
+
+```
+using service1 as service from '../../srv/service';
+
+annotate service.RootEntities {
+    validFrom @UI.HiddenFilter;
+    validTo @UI.HiddenFilter;
+}
+```
