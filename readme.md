@@ -56,10 +56,46 @@ using service1 as service from '../../srv/service';
 
 annotate service1.RootEntities with @(
     UI.SelectionFields: [
-        country,
+        country_code,
+        region_country_code,
         validFrom,
         validTo,
     ]
 );
 ```
+
+### Step 6: Add default values to the filter
+
+To add default values to the filter, make use of the SelectionVariant UI annotation. With this selection variant 
+annotation, you can set default values as parameter and as select options. 
+
+```
+UI.SelectionVariant: {
+        Parameters: [
+            {
+                $Type: 'UI.Parameter',
+                PropertyName: 'validFrom',
+                PropertyValue: '20230101'
+            }
+        ],
+        SelectOptions: [
+            {
+                PropertyName: 'country_code',
+                Ranges: [
+                    {
+                        Sign: #I,
+                        Option: #EQ,
+                        Low: 'DE',
+                        High: ''
+                    }
+                ]
+            }
+        ]
+    }
+```
+
+Help Links: 
+https://sapui5.hana.ondemand.com/sdk/#/topic/f27ad7bc1f9c4b0d947b1fb18c37e94c.html
+
+
 
