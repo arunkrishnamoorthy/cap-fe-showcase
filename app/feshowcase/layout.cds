@@ -6,5 +6,28 @@ annotate service1.RootEntities with @(
         region_country_code,
         validFrom,
         validTo,
-    ]
+    ],
+    UI.SelectionVariant: {
+        Parameters: [
+            {
+                $Type: 'UI.Parameter',
+                PropertyName: 'validFrom',
+                PropertyValue: '20230101'
+            }
+        ],
+        SelectOptions: [
+            {
+                PropertyName: 'country_code',
+                Ranges: [
+                    {
+                        Sign: #I,
+                        Option: #EQ,
+                        Low: 'DE',
+                        High: ''
+                    }
+                ]
+            }
+        ]
+    }
 );
+
