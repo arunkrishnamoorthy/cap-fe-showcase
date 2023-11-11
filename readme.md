@@ -151,3 +151,69 @@ annotate service1.RootEntities with @(
 ```
 
 > This is not working at the moment. This part needs to be revisted.
+
+### Step 9: Adding value help 
+
+For the field, contact_ID defined in the rootEntities, the value helps are not defined from the service. To add value helps we will use the annotation, Common.ValueList 
+
+To add the annotation for the value helps, the annotation has to be added at the entity property level. The difference between adding annotation at entity and property level is as follows. 
+ 
+Adding annotation at entity level. 
+```
+    annotate service.entity with @(
+        // add the annotations here. 
+    )
+```
+
+Adding annotation at property level 
+```
+    annotate service.entity with {
+        fieldName @( 
+            // add the annotations here. 
+        )
+    }
+```
+
+add the value help annotations to the contact field of the Root entites. There is a collection/entity named contacts that supply the value help data. 
+The property from the rootEntities(for which value help is provided) are called local property 
+The property from the contacts(which provides the data for value help ) are called value list property. 
+
+add the annotation to the field contact of root entities as follows. 
+
+```
+using service1 as service from '../../srv/service';
+
+annotate service.RootEntities with {
+    contact @( Common: {
+        Text: contact.name,
+        TextArrangement : #TextOnly,
+        ValueList : {
+            Label: 'Contacts',
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Contacts',
+            Parameters: [
+                {
+                    $Type: 'Common.ValueListParameterInOut',
+                    ValueListProperty: 'ID',
+                    LocalDataProperty: 'contact_ID'
+                },
+                {
+                    $Type: 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'city'
+                },
+                {
+                    $Type: 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'street'
+                },
+                {
+                    $Type: 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'country_code'
+                }
+            ]
+        },
+    })
+}
+```
+
+>Note: when grouping the annotations in a seperate cds file. always links the annotation file to the main annotation file outside of the ui application. 
+

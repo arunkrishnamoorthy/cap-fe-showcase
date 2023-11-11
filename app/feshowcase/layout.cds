@@ -6,6 +6,7 @@ annotate service1.RootEntities with @(
         region_country_code,
         validFrom,
         validTo,
+        contact_ID
     ],
     UI.SelectionVariant: {
         Parameters: [
