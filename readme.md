@@ -217,3 +217,79 @@ annotate service.RootEntities with {
 
 >Note: when grouping the annotations in a seperate cds file. always links the annotation file to the main annotation file outside of the ui application. 
 
+### Step 10: Adding dependent filters
+
+In the filters that we have defined in previous steps, we have selection fields, country and region. Now when a value is selected in the country, the value list for the region should by default be filtered with the selected country. 
+
+The value helps for the country and region is provided by default by the means of the types associated. To link the selected country in the region entity, let us overwrite the value help for the region property. 
+
+Add the following annotation along with contact field add in the previous step. 
+```
+    region @(
+        Common: {
+            Text : 'region.name',
+            TextArrangement : #TextFirst,
+            ValueList : {
+                $Type : 'Common.ValueListType',
+                CollectionPath : 'Regions',
+                Parameters: [
+                    {
+                        $Type: 'Common.ValueListParameterInOut',
+                        LocalDataProperty: region_code,
+                        ValueListProperty: 'code'
+                    },
+                    {
+                        $Type: 'Common.ValueListParameterOut',
+                        LocalDataProperty: region.name,
+                        ValueListProperty: 'name'
+                    },
+                    {
+                        $Type: 'Common.ValueListParameterIn',
+                        LocalDataProperty: country_code,
+                        ValueListProperty: 'country_code'
+                    }
+                ]
+            }
+        }
+    )
+```
+
+Now the data will be filterd by the selected country. the filter for the country will be shown in the value help UI. 
+if we don't want the country to show up in the UI add the parameter ValueListParameterFilterOnly. 
+
+```
+region @(
+        Common: {
+            Text : 'region.name',
+            TextArrangement : #TextFirst,
+            ValueList : {
+                $Type : 'Common.ValueListType',
+                CollectionPath : 'Regions',
+                Parameters: [
+                    {
+                        $Type: 'Common.ValueListParameterInOut',
+                        LocalDataProperty: region_code,
+                        ValueListProperty: 'code'
+                    },
+                    {
+                        $Type: 'Common.ValueListParameterOut',
+                        LocalDataProperty: region.name,
+                        ValueListProperty: 'name'
+                    },
+                    {
+                        $Type               : 'Common.ValueListParameterFilterOnly',
+                        ValueListProperty   : 'country_code',
+                    },
+                    {
+                        $Type: 'Common.ValueListParameterIn',
+                        LocalDataProperty: country_code,
+                        ValueListProperty: 'country_code'
+                    }
+                    
+                ]
+            }
+        }
+    )
+```
+
+>To be validated again: ValueListFilterOnly parameter isn't working. 
