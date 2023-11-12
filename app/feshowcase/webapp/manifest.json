@@ -129,6 +129,16 @@
                                             "text": "Change Progress"
                                         }
                                     }
+                                },
+                                "@com.sap.vocabularies.UI.v1.SelectionFields": {
+                                    "filterFields": {
+                                        "customFilterKey": {
+                                            "label": "customFilterName",
+                                            "property": "starsValue",
+                                            "template": "demo.fe.showcase.feshowcase.ext.customFilterKey.CustomFilter",
+                                            "required": false
+                                        }
+                                    }
                                 }
                             }
                         }

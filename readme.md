@@ -293,3 +293,73 @@ region @(
 ```
 
 >To be validated again: ValueListFilterOnly parameter isn't working. 
+
+### Step 11- Create Custom filter 
+
+In the guided development page, use the option custom filter to the page. The following things happen. 
+In the manifest.json file, the following code is added in the control configuration of the list report page. 
+
+```
+"@com.sap.vocabularies.UI.v1.SelectionFields": {
+                                    "filterFields": {
+                                        "customFilterKey": {
+                                            "label": "customFilterName",
+                                            "property": "starsValue",
+                                            "template": "demo.fe.showcase.feshowcase.ext.customFilterKey.CustomFilter",
+                                            "required": false
+                                        }
+                                    }
+                                }
+```
+
+In the extension folder `ext`, the following files are created. 
+
+1. Fragment file - This file contains the xml code for the filter to be rendered in the filter bar. 
+2. Javascript file - This file contains the function that converts the selected value to filter of (sap.ui.model.Filter)
+
+This filter is then used in the odata request when clicked on go button. 
+
+
+Fragment file. 
+
+```xml 
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+        <ComboBox
+            id="idCustomFilter"
+            core:require="{handler: 'demo/fe/showcase/feshowcase/ext/customFilterKey/customFilterKey'}"
+            selectedKey="{path: 'filterValues>', type: 'sap.fe.macros.filter.type.Value', formatOptions: { operator: 'demo.fe.showcase.feshowcase.ext.customFilterKey.customFilterKey.CustomFilterFunction' }}"
+        >
+            <items>
+                <core:Item key="0" text="Item value 1"/>
+                <core:Item key="1" text="Item value 2"/>
+                <core:Item key="2" text="Item value 3"/>
+            </items>
+        </ComboBox>
+</core:FragmentDefinition>
+```
+
+Javascript File: 
+```
+sap.ui.define(["sap/ui/model/Filter", "sap/ui/model/FilterOperator"], function(Filter, FilterOperator) {
+    "use strict";
+    return {
+        CustomFilterFunction: function(sValue) {
+            switch (sValue) {
+                case "0":
+                        return new Filter({ path: "starsValue", operator: FilterOperator.LT, value1: 100 });
+                case "1":
+                        return new Filter({
+                        filters: [
+                            new Filter({ path: "starsValue", operator: FilterOperator.GT, value1: 100 }),
+                            new Filter({ path: "starsValue", operator: FilterOperator.LT, value1: 500 })
+                        ],
+                        and: true
+                    });
+                case "2":
+                        return new Filter({ path: "starsValue", operator: FilterOperator.GT, value1: 500 });
+            }
+        }
+    };
+});
+
+```

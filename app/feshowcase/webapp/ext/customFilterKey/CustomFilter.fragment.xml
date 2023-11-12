@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+        <ComboBox
+            id="idCustomFilter"
+            core:require="{handler: 'demo/fe/showcase/feshowcase/ext/customFilterKey/customFilterKey'}"
+            selectedKey="{path: 'filterValues>', type: 'sap.fe.macros.filter.type.Value', formatOptions: { operator: 'demo.fe.showcase.feshowcase.ext.customFilterKey.customFilterKey.CustomFilterFunction' }}"
+        >
+            <items>
+                <core:Item key="0" text="Item value 1"/>
+                <core:Item key="1" text="Item value 2"/>
+                <core:Item key="2" text="Item value 3"/>
+            </items>
+        </ComboBox>
+</core:FragmentDefinition>
